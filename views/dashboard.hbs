@@ -1,0 +1,40 @@
+{{> _header}}
+<div class="container m-4">
+
+<h6>Dashboard</h6>
+<h3>Welcome {{name}}</h3>
+<p>Here are your stories</p>
+
+{{#if stories}}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each stories}}
+        <tr>
+            <td><a href="/stories/{{_id}}" style="text-decoration: none; color:black">{{title}}</a></td>
+            <td>{{formatDate createdAt 'DD MMM YYYY, h:mm:ss a'}}</td>
+            <td><span class="dash-status">{{status}}</span></td>
+            <td>
+                <a href="/stories/edit/{{_id}}" class="btn-float"><i class="fa fa-edit" style="color: purple;"></i></a>
+                <form action="/stories/{{_id}}" method="post">
+                <input type="hidden" name="_method" value="DELETE" />
+                <button class="btn "><i class="fa fa-trash" style="color: red;"></i></button>
+                </form>
+                
+            </td>
+        </tr>
+
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p style="font-size: 20px;">You have not created any stories</p>
+{{/if}}
+</div>
+{{> _add_btn}}
